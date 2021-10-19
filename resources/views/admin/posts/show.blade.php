@@ -6,7 +6,13 @@
         <p>{{ $post->content }}</p>
         <address>{{ $post->created_at }}</address>
         <div class="d-flex justify-content-end">
-            <a href="{{ route('admin.posts.index') }}">Indietro</a>
+            <a href="{{ route('admin.posts.index') }}" class="btn btn-primary">Indietro</a>
+            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-secondary mx-2">Modifica</a>
+            <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-warning">Cancella</button>
+            </form>
         </div>
     </div>
 @endsection

@@ -15,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(5);
 
         return view('admin.posts.index', compact('posts'));
     }
@@ -27,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +38,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $post = new Post();
+        $post->fill($data);
+        $post->save();
+
+        return redirect()->route('admin.posts.show', $post->id);
     }
 
     /**
