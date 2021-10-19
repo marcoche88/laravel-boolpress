@@ -3,6 +3,15 @@
 @section('content')
     <div class="container">
         <h1>I miei post</h1>
+        {{-- alert delete post--}}
+        @if (session('delete'))
+            <div class="my-3">
+                <div class="alert alert-danger" role="alert">
+                    Eliminato con successo il post numero {{ session('delete') }}!
+                </div>
+            </div>
+        @endif
+
         <table class="table">
             <thead>
                 <tr>
