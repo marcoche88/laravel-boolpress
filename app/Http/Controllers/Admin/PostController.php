@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PostController extends Controller
 {
@@ -38,6 +39,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|unique:posts|max:50',
+            'content' => 'required'
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'content.required' => 'Il contenuto del post è obbligatorio',
+            'unique' => 'Il titolo già esiste',
+            'max' => 'Il numero massimo di caratteri per il titolo è :max'
+        ]);
+
         $data = $request->all();
         $post = new Post();
         $post->fill($data);
@@ -77,6 +88,16 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:50'],
+            'content' => 'required'
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'content.required' => 'Il contenuto del post è obbligatorio',
+            'unique' => 'Il titolo già esiste',
+            'max' => 'Il numero massimo di caratteri per il titolo è :max'
+        ]);
+
         $data = $request->all();
         $post->update($data);
 
