@@ -19,6 +19,9 @@
         </div>
         <button type="submit" class="btn btn-success">Invia</button>
     </form>
+    <div class="d-flex justify-content-end mt-3">
+        <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">Indietro</a>
+    </div>
 </div>
     
 @endsection
