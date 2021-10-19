@@ -16,7 +16,7 @@
                 <tr>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->created_at }}</td>
-                    <td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary"></a></td>
+                    <td><a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Vai</a></td>
                 </tr>
                 @empty
                     <tr><td colspan="3" class="text-center">Non ci sono posts</td></tr>
