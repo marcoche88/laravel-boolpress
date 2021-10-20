@@ -1,7 +1,11 @@
 <template>
   <div>
     <h2>Lista dei post</h2>
-    <PostCard v-for="post in posts" :key="post.id" :post="post" />
+    <!-- loader -->
+    <Loader v-if="isLoading" />
+
+    <!-- card list -->
+    <PostCard v-else v-for="post in posts" :key="post.id" :post="post" />
 
     <!-- pagination -->
     <nav aria-label="Page navigation example">
@@ -40,21 +44,25 @@
 
 <script>
 import PostCard from "./PostCard.vue";
+import Loader from "../Loader.vue";
 
 export default {
   name: "PostList",
   components: {
     PostCard,
+    Loader,
   },
   data() {
     return {
       posts: [],
       uri: "http://127.0.0.1:8000/api/posts",
       pagination: {},
+      isLoading: false,
     };
   },
   methods: {
     getPosts(page) {
+      this.isLoading = true;
       axios
         .get(`${this.uri}?page=${page}`)
         .then((res) => {
@@ -69,6 +77,9 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .then(() => {
+          this.isLoading = false;
         });
     },
   },
