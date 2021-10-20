@@ -1,5 +1,7 @@
 <template>
-  <div class="card-header">Benvenuti!!!</div>
+  <header>
+    <h1 class="text-center">Boolpress</h1>
+  </header>
 </template>
 
 <script>
