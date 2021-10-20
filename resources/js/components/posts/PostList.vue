@@ -2,6 +2,39 @@
   <div>
     <h2>Lista dei post</h2>
     <PostCard v-for="post in posts" :key="post.id" :post="post" />
+
+    <!-- pagination -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li
+          class="page-item"
+          v-if="pagination.currentPage > 1"
+          @click="getPosts(pagination.currentPage - 1)"
+        >
+          <a class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li
+          class="page-item"
+          :class="pagination.currentPage === n ? 'active' : ''"
+          v-for="n in pagination.lastPage"
+          :key="n"
+          @click="getPosts(n)"
+        >
+          <a class="page-link">{{ n }}</a>
+        </li>
+        <li
+          class="page-item"
+          v-if="pagination.currentPage < pagination.lastPage"
+          @click="getPosts(pagination.currentPage + 1)"
+        >
+          <a class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
@@ -17,14 +50,22 @@ export default {
     return {
       posts: [],
       uri: "http://127.0.0.1:8000/api/posts",
+      pagination: {},
     };
   },
   methods: {
-    getPost() {
+    getPosts(page) {
       axios
-        .get(`${this.uri}`)
+        .get(`${this.uri}?page=${page}`)
         .then((res) => {
-          this.posts = res.data;
+          //   destructuring
+          const { data, current_page, last_page } = res.data;
+
+          this.posts = data;
+          this.pagination = {
+            currentPage: current_page,
+            lastPage: last_page,
+          };
         })
         .catch((err) => {
           console.log(err);
@@ -32,10 +73,13 @@ export default {
     },
   },
   created() {
-    this.getPost();
+    this.getPosts();
   },
 };
 </script>
 
-<style>
+<style scoped>
+.page-item {
+  cursor: pointer;
+}
 </style>
