@@ -45,5 +45,19 @@
             </tbody>
         </table>
         {{ $posts->links() }}
+        <div class="row mt-5">
+            @foreach ($categories as $category)
+                <div class="col-4 text-center my-3">
+                    <h4 class="card mb-0 py-2 bg-info">{{ $category->name }}</h4>
+                    <ul class="list-group mt-0">
+                        @forelse ($category->posts as $post)
+                            <li class="list-group-item">{{ $post->title }}</li>
+                        @empty
+                            <li class="list-group-item">Nessun Post</li>
+                        @endforelse   
+                    </ul>
+                </div>   
+            @endforeach
+        </div>
     </div>
 @endsection
