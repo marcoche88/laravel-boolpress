@@ -27,7 +27,12 @@
                 <tr>
                     <td>{{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
-                    <td>@if($post->category) {{ $post->category->name }} @else - @endif</td>
+                    <td>@if($post->category)
+                            <span class="badge badge-{{ $post->category->color }} p-2">{{ $post->category->name }}</span>
+                        @else 
+                            - 
+                        @endif
+                    </td>
                     <td>{{ $post->created_at }}</td>
                     <td class="d-flex justify-content-end">
                         <a href="{{ route('admin.posts.show', $post->id) }}" class="btn btn-primary">Vai</a>
@@ -48,7 +53,7 @@
         <div class="row mt-5">
             @foreach ($categories as $category)
                 <div class="col-4 text-center my-3">
-                    <h4 class="card mb-0 py-2 bg-info">{{ $category->name }}</h4>
+                    <h4 class="card mb-0 py-2 bg-{{ $category->color }}">{{ $category->name }}</h4>
                     <ul class="list-group mt-0">
                         @forelse ($category->posts as $post)
                             <li class="list-group-item">{{ $post->title }}</li>
