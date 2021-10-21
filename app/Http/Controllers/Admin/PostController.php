@@ -79,7 +79,8 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit', compact('post'));
+        $categories = Category::all();
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -93,7 +94,8 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:50'],
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id'
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto del post è obbligatorio',
