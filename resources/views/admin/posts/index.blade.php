@@ -53,7 +53,10 @@
         <div class="row mt-5">
             @foreach ($categories as $category)
                 <div class="col-4 text-center my-3">
-                    <h4 class="card mb-0 py-2 bg-{{ $category->color }}">{{ $category->name }}</h4>
+                    <div class="card bg-{{ $category->color }}">
+                        <h4 class="my-0 py-2">{{ $category->name }}</h4>
+                        <small>Totale post: @if($category->posts) {{ count($category->posts) }} @else - @endif</small>
+                    </div>
                     <ul class="list-group mt-0">
                         @forelse ($category->posts as $post)
                             <li class="list-group-item">{{ $post->title }}</li>

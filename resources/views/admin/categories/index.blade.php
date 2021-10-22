@@ -18,6 +18,7 @@
                     <th scope="col">#</th>
                     <th scope='col'>Categoria</th>
                     <th scope="col">Colore</th>
+                    <th scope='col'>Totale post</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                     <td>{{ $category->id }}</td>
                     <td>{{ $category->name }}</td>
                     <td>{{ $category->color }}</td>
+                    <td>@if($category->posts) {{ count($category->posts) }} @else 0 @endif</td>
                     <td class="d-flex justify-content-end">
                         <a href="{{ route('admin.categories.show', $category->id) }}" class="btn btn-primary">Vai</a>
                         <a href="{{ route('admin.categories.edit', $category->id) }}" class="btn btn-secondary mx-2">Modifica</a>
