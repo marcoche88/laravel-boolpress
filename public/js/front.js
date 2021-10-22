@@ -2004,6 +2004,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: {
@@ -38605,22 +38614,39 @@ var render = function() {
       },
       [
         _c("div", [
-          _vm._v(
-            "\n      Creato il: " +
-              _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
-              ", alle\n      " +
-              _vm._s(_vm.getFormattedHour(_vm.post.created_at)) +
-              "\n    "
-          )
+          _c("span", [
+            _vm._v(
+              "\n        Creato il: " +
+                _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
+                ", alle\n        " +
+                _vm._s(_vm.getFormattedHour(_vm.post.created_at)) +
+                "\n      "
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", [
+            _vm._v("\n        Da:"),
+            _c("strong", [_vm._v(" " + _vm._s(_vm.post.user.name) + " ")])
+          ]),
+          _vm._v(" "),
+          _c("span", [
+            _vm._v("\n        ("),
+            _c("em", [
+              _vm._v(
+                " Indirizzo: " + _vm._s(_vm.post.user.user_info.address) + " "
+              )
+            ]),
+            _vm._v(")\n      ")
+          ])
         ]),
         _vm._v(" "),
         _c(
-          "span",
+          "div",
           {
             staticClass: "badge badge-pill py-1",
             class: "badge-" + _vm.post.category.color
           },
-          [_vm._v(_vm._s(_vm.post.category.name))]
+          [_vm._v("\n      " + _vm._s(_vm.post.category.name) + "\n    ")]
         )
       ]
     ),

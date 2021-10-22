@@ -2,14 +2,23 @@
   <div class="card my-4">
     <div class="card-header d-flex justify-content-between align-items-center">
       <div>
-        Creato il: {{ getFormattedDate(post.created_at) }}, alle
-        {{ getFormattedHour(post.created_at) }}
+        <span>
+          Creato il: {{ getFormattedDate(post.created_at) }}, alle
+          {{ getFormattedHour(post.created_at) }}
+        </span>
+        <span>
+          Da:<strong> {{ post.user.name }} </strong>
+        </span>
+        <span>
+          (<em> Indirizzo: {{ post.user.user_info.address }} </em>)
+        </span>
       </div>
-      <span
+      <div
         class="badge badge-pill py-1"
         :class="`badge-${post.category.color}`"
-        >{{ post.category.name }}</span
       >
+        {{ post.category.name }}
+      </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
