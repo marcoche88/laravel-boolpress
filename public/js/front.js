@@ -1997,6 +1997,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: {
@@ -38590,15 +38597,33 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card my-4" }, [
-    _c("div", { staticClass: "card-header" }, [
-      _vm._v(
-        "\n    Creato il: " +
-          _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
-          ", alle\n    " +
-          _vm._s(_vm.getFormattedHour(_vm.post.created_at)) +
-          "\n  "
-      )
-    ]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "card-header d-flex justify-content-between align-items-center"
+      },
+      [
+        _c("div", [
+          _vm._v(
+            "\n      Creato il: " +
+              _vm._s(_vm.getFormattedDate(_vm.post.created_at)) +
+              ", alle\n      " +
+              _vm._s(_vm.getFormattedHour(_vm.post.created_at)) +
+              "\n    "
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            staticClass: "badge badge-pill py-1",
+            class: "badge-" + _vm.post.category.color
+          },
+          [_vm._v(_vm._s(_vm.post.category.name))]
+        )
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.post.title))]),

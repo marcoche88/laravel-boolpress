@@ -1,8 +1,15 @@
 <template>
   <div class="card my-4">
-    <div class="card-header">
-      Creato il: {{ getFormattedDate(post.created_at) }}, alle
-      {{ getFormattedHour(post.created_at) }}
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        Creato il: {{ getFormattedDate(post.created_at) }}, alle
+        {{ getFormattedHour(post.created_at) }}
+      </div>
+      <span
+        class="badge badge-pill py-1"
+        :class="`badge-${post.category.color}`"
+        >{{ post.category.name }}</span
+      >
     </div>
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
