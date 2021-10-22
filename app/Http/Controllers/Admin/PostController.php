@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class PostController extends Controller
@@ -55,6 +56,7 @@ class PostController extends Controller
 
         $data = $request->all();
         $post = new Post();
+        $data['user_id'] = Auth::id(); //aggiunge in automatico alla colonna user_id l'id dell'utente loggato in quel momento
         $post->fill($data);
         $post->save();
 
