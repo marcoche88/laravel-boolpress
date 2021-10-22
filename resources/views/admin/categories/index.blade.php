@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container">
-        <h1>Le mie categorie</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>Le mie categorie</h1>
+            <a class="btn btn-info" href="{{ route('admin.categories.create') }}">Aggiungi nuova categoria</a>
+        </div>
         {{-- alert delete category--}}
         @if (session('delete'))
             <div class="my-3">

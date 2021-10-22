@@ -2,7 +2,10 @@
 
 @section('content')
     <div class="container">
-        <h1>I miei post</h1>
+        <div class="d-flex justify-content-between align-items-center">
+            <h1>I miei post</h1>
+            <a class="btn btn-info" href="{{ route('admin.posts.create') }}">Aggiungi nuovo post</a>
+        </div>
         {{-- alert delete post--}}
         @if (session('delete'))
             <div class="my-3">

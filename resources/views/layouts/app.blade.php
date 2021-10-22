@@ -57,9 +57,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('admin.home') }}">Dashboard</a>
                                     <a class="dropdown-item" href="{{ route('admin.posts.index') }}">Posts</a>
-                                    <a class="dropdown-item" href="{{ route('admin.posts.create') }}">Aggiungi nuovo post</a>
                                     <a class="dropdown-item" href="{{ route('admin.categories.index') }}">Categorie</a>
-                                    <a class="dropdown-item" href="{{ route('admin.categories.create') }}">Aggiungi nuova categoria</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
