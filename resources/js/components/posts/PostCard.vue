@@ -23,6 +23,14 @@
     <div class="card-body">
       <h5 class="card-title">{{ post.title }}</h5>
       <p class="card-text">{{ post.content }}</p>
+      <div
+        class="badge badge-pill mx-2"
+        v-for="tag in post.tags"
+        :key="tag.id"
+        :style="`background-color: ${tag.color}`"
+      >
+        {{ tag.name }}
+      </div>
     </div>
   </div>
 </template>

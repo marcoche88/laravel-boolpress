@@ -2013,6 +2013,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PostCard",
   props: {
@@ -38651,11 +38659,32 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c("h5", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.post.title))]),
-      _vm._v(" "),
-      _c("p", { staticClass: "card-text" }, [_vm._v(_vm._s(_vm.post.content))])
-    ])
+    _c(
+      "div",
+      { staticClass: "card-body" },
+      [
+        _c("h5", { staticClass: "card-title" }, [
+          _vm._v(_vm._s(_vm.post.title))
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "card-text" }, [
+          _vm._v(_vm._s(_vm.post.content))
+        ]),
+        _vm._v(" "),
+        _vm._l(_vm.post.tags, function(tag) {
+          return _c(
+            "div",
+            {
+              key: tag.id,
+              staticClass: "badge badge-pill mx-2",
+              style: "background-color: " + tag.color
+            },
+            [_vm._v("\n      " + _vm._s(tag.name) + "\n    ")]
+          )
+        })
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
