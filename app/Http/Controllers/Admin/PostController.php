@@ -50,7 +50,7 @@ class PostController extends Controller
             'title' => 'required|unique:posts|max:50',
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
-            'tags' => 'nullable|exists:tags.id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto del post è obbligatorio',
@@ -111,11 +111,13 @@ class PostController extends Controller
             'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:50'],
             'content' => 'required',
             'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags,id',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto del post è obbligatorio',
             'unique' => 'Il titolo già esiste',
             'max' => 'Il numero massimo di caratteri per il titolo è :max',
+            'tags.exists' => 'Valore non valido per i tag',
         ]);
 
         $data = $request->all();
@@ -139,6 +141,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        if (count($post->tags)) $post->tags()->detach();
+
         $post->delete();
 
         return redirect()->route('admin.posts.index')->with('delete', $post->id);
