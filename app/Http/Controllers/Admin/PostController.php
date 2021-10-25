@@ -90,7 +90,12 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $tags = Tag::all();
+
+        // crea un array con tutti gli id dei tag del singolo post
+        $tagIds = $post->tags->pluck('id')->toArray();
+
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagIds'));
     }
 
     /**
@@ -105,15 +110,22 @@ class PostController extends Controller
         $request->validate([
             'title' => ['required', Rule::unique('posts')->ignore($post->id), 'max:50'],
             'content' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto del post è obbligatorio',
             'unique' => 'Il titolo già esiste',
-            'max' => 'Il numero massimo di caratteri per il titolo è :max'
+            'max' => 'Il numero massimo di caratteri per il titolo è :max',
         ]);
 
         $data = $request->all();
+
+        if (!array_key_exists('tags', $data)) {
+            $post->tags()->detach();
+        } else {
+            $post->tags()->sync($data['tags']);
+        }
+
         $post->update($data);
 
         return redirect()->route('admin.posts.show', $post->id);
