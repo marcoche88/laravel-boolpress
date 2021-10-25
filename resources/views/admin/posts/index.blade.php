@@ -21,6 +21,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Titolo</th>
                     <th scope='col'>Categoria</th>
+                    <th scope='col'>Tag</th>
                     <th scope="col">Scritto il</th>
                     <th scope="col">Scritto da</th>
                     <th scope="col">Indirizzo</th>
@@ -37,6 +38,13 @@
                         @else 
                             - 
                         @endif
+                    </td>
+                    <td>
+                        @forelse ($post->tags as $tag)
+                            <span class="badge" style="background-color: {{ $tag->color }}">{{ $tag->name }}</span>
+                        @empty
+                            -
+                        @endforelse
                     </td>
                     <td>{{ $post->created_at }}</td>
                     <td>@if($post->user) {{ $post->user->name }} @else - @endif</td>
