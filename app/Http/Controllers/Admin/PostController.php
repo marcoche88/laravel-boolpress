@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Post;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -32,7 +33,9 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -46,12 +49,14 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|unique:posts|max:50',
             'content' => 'required',
-            'category_id' => 'nullable|exists:categories,id'
+            'category_id' => 'nullable|exists:categories,id',
+            'tags' => 'nullable|exists:tags.id',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
             'content.required' => 'Il contenuto del post è obbligatorio',
             'unique' => 'Il titolo già esiste',
-            'max' => 'Il numero massimo di caratteri per il titolo è :max'
+            'max' => 'Il numero massimo di caratteri per il titolo è :max',
+            'tags.exists' => 'Valore non valido per i tag',
         ]);
 
         $data = $request->all();
@@ -59,6 +64,8 @@ class PostController extends Controller
         $data['user_id'] = Auth::id(); //aggiunge in automatico alla colonna user_id l'id dell'utente loggato in quel momento
         $post->fill($data);
         $post->save();
+
+        if (array_key_exists('tags', $data)) $post->tags()->attach($data['tags']);
 
         return redirect()->route('admin.posts.show', $post->id);
     }
