@@ -13,7 +13,7 @@ class TagsTableSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $tag_names = ['FrontEnd', 'BackEnd', 'FullStack', 'UX/UI', 'DevOps'];
+        $tag_names = ['FrontEnd', 'BackEnd', 'FullStack', 'UI/UX', 'DevOps'];
 
         foreach ($tag_names as $name) {
             $tag = new Tag();
