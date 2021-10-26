@@ -94,9 +94,9 @@ class PostController extends Controller
         $tags = Tag::all();
 
         // crea un array con tutti gli id dei tag del singolo post
-        $tagIds = $post->tags->pluck('id')->toArray();
+        $tag_ids = $post->tags->pluck('id')->toArray();
 
-        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tagIds'));
+        return view('admin.posts.edit', compact('post', 'categories', 'tags', 'tag_ids'));
     }
 
     /**
